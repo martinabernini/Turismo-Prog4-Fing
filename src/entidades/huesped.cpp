@@ -1,5 +1,5 @@
-#include "../include/huesped.h"
-#include "../include/usuario.h"
+#include "../../include/huesped.h"
+#include "../../include/usuario.h"
 #include <string>
 #include <iostream>
 using namespace std;

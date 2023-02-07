@@ -1,4 +1,4 @@
-#include "../include/DTEstadia.h"
+#include "../../include/DTEstadia.h"
 
 DTEstadia::DTEstadia(DTFecha* fechaCheckIn, DTFecha* fechaCheckOut, int codigoReserva, string emailHuesped){
     this->fechaCheckIn = fechaCheckIn;

@@ -1,6 +1,6 @@
 //#include "../include/reserva.h"
-#include "../include/reserva.h"
-#include "../include/reservaGrupal.h"
+#include "../../include/reserva.h"
+#include "../../include/reservaGrupal.h"
 
 
 #include <string>

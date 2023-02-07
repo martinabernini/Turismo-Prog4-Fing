@@ -1,4 +1,4 @@
-#include "../include/habitacion.h"
+#include "../../include/habitacion.h"
 
 #include <string>
 #include <iostream>

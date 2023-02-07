@@ -1,4 +1,4 @@
-#include "../include/DTHuesped.h"
+#include "../../include/DTHuesped.h"
 #include <iostream>
 
   DTHuesped::DTHuesped(string nombre, string email, bool esFinger){

@@ -1,4 +1,4 @@
-#include "../include/DTEmpleado.h"
+#include "../../include/DTEmpleado.h"
 
 DTEmpleado::DTEmpleado(string email, string nombre, string password, cargoEmpleado cargo, bool estaSuscrito, hostal *nomHostal){
     this->email=email;

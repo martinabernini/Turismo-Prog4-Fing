@@ -30,6 +30,12 @@ using namespace std;
 int menuPrincipal()
 {
 
+  cout << "----------------------------------------------" << endl;
+  cout << "-                Bienvenid@                  -" << endl;
+  cout << "----------------------------------------------" << endl;
+  cout << "-            Ingrese una opcion:             -" << endl;
+  cout << "----------------------------------------------" << endl;
+
   cout << "1 - Alta de Usuario" << endl; //Implementado y testeado
   cout << "2 - Alta de Hostal" << endl; //Implementado y testeado
   cout << "3 - Alta de Habitacion" << endl; //Implementado y testeado

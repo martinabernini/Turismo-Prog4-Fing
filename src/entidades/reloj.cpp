@@ -1,5 +1,5 @@
-#include "../include/reloj.h"
-#include "../include/DTFecha.h"
+#include "../../include/reloj.h"
+#include "../../include/DTFecha.h"
 
 #include <iostream>
 using namespace std;

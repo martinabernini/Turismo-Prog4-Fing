@@ -1,4 +1,4 @@
-#include "../include/DTReservaIndividual.h"
+#include "../../include/DTReservaIndividual.h"
 
 DTReservaIndividual::DTReservaIndividual(int codigo, DTFecha checkIn, DTFecha checkOut, estadoReserva estado, float costo, int habitacion, bool pagado){
     this->codigo=codigo;

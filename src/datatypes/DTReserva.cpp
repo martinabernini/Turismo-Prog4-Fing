@@ -1,4 +1,4 @@
-#include "../include/DTReserva.h"
+#include "../../include/DTReserva.h"
 
 DTReserva::DTReserva(){}
 DTReserva::DTReserva(int codigo, DTFecha* checkIn, DTFecha* checkOut, estadoReserva estado/* float costo, int habitacion*/){

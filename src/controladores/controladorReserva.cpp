@@ -1,13 +1,13 @@
-#include "../include/controladorReserva.h"
-#include "../include/controladorHostal.h"
-#include "../include/reservaIndividual.h"
-#include "../include/reservaGrupal.h"
-#include "../include/DTReserva.h"
-#include "../include/reserva.h"
-#include "../include/DTFecha.h"
+#include "../../include/controladorReserva.h"
+#include "../../include/controladorHostal.h"
+#include "../../include/reservaIndividual.h"
+#include "../../include/reservaGrupal.h"
+#include "../../include/DTReserva.h"
+#include "../../include/reserva.h"
+#include "../../include/DTFecha.h"
 
-#include "../include/IHostal.h"
-#include "../include/fabrica.h"
+#include "../../include/IHostal.h"
+#include "../../include/fabrica.h"
 
 controladorReserva::controladorReserva()
 {

@@ -1,5 +1,5 @@
-#include "../include/hostal.h"
-#include "../include/estadia.h"
+#include "../../include/hostal.h"
+#include "../../include/estadia.h"
 
 hostal::hostal(string nombre, string direccion, string telefono)
 {

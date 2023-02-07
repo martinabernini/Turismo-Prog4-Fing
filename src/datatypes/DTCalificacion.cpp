@@ -1,4 +1,4 @@
-#include "../include/DTCalificacion.h"
+#include "../../include/DTCalificacion.h"
 
 DTCalificacion::DTCalificacion(int calificacion, int id, string comentario, string respuesta, DTFecha* fechaRealizacion){
     this->calificacion=calificacion;

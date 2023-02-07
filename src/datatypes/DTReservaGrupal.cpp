@@ -1,5 +1,5 @@
-#include "../include/DTReservaGrupal.h"
-#include "../include/DTReserva.h"
+#include "../../include/DTReservaGrupal.h"
+#include "../../include/DTReserva.h"
 
 DTReservaGrupal::DTReservaGrupal(int codigo, DTFecha checkIn, DTFecha checkOut, estadoReserva estado, float costo, int habitacion, DTHuesped **huespedes){
     this->codigo=codigo;

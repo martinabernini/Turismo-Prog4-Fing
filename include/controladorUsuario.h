@@ -21,6 +21,7 @@ class controladorUsuario: public IUsuario{
         map<string,usuario*> coleccionUsuarios;  //coleccion de usuarios
         map<string,empleado*> coleccionEmpleados; ///coleccion de empleados
         map<string,huesped*> coleccionHuesped; //coleccion de huespedes
+        
         //Memoria
         string nombre;
         string email;

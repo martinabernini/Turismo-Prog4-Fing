@@ -1,4 +1,4 @@
-#include "../include/DTHostal.h"
+#include "../../include/DTHostal.h"
 
 DTHostal::DTHostal(string nombre, string direccion, string telefono){
     this->nombre=nombre;

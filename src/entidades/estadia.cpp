@@ -1,4 +1,4 @@
-#include "../include/estadia.h"
+#include "../../include/estadia.h"
 
 DTFecha* estadia::getCheckIn(){
     return this->fechaCheckIn;

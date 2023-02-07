@@ -1,4 +1,4 @@
-#include "../include/calificacion.h"
+#include "../../include/calificacion.h"
 
 int contador=1;
 

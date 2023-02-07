@@ -1,7 +1,7 @@
-#include "../include/controladorUsuario.h"
+#include "../../include/controladorUsuario.h"
 #include <iostream>
 #include <set>
-#include "../include/DTCalificacion.h"
+#include "../../include/DTCalificacion.h"
 
 
 using namespace std;

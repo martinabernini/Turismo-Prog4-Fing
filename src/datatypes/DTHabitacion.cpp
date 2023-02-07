@@ -1,4 +1,4 @@
-#include "../include/DTHabitacion.h"
+#include "../../include/DTHabitacion.h"
 
 #include <string>
 #include <iostream>

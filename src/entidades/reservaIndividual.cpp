@@ -1,7 +1,7 @@
 //#include "../include/reserva.h"
-#include "../include/reserva.h"
-#include "../include/reservaIndividual.h"
-#include "../include/habitacion.h"
+#include "../../include/reserva.h"
+#include "../../include/reservaIndividual.h"
+#include "../../include/habitacion.h"
 
 #include <string>
 #include <iostream>

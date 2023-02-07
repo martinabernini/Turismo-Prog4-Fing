@@ -9,13 +9,13 @@ using namespace std;
 
 class calificacion {
     private:
-       int Calificacion;
-       int id;
-       string comentario;
-       string respuesta;
-       DTFecha* fechaRespuesta;
-       DTFecha* fechaRealizacion;
-       huesped* huespedComentario;
+        int Calificacion;
+        int id;
+        string comentario;
+        string respuesta;
+        DTFecha* fechaRespuesta;
+        DTFecha* fechaRealizacion;
+        huesped* huespedComentario;
         int codReserva;
 
     public:

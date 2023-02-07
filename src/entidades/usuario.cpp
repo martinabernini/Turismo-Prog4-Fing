@@ -1,4 +1,4 @@
-#include "../include/usuario.h"
+#include "../../include/usuario.h"
      
 usuario::usuario(){
     this->email = "";

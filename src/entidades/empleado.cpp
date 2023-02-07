@@ -1,6 +1,6 @@
-#include "../include/empleado.h"
-#include "../include/usuario.h"
-#include "../include/hostal.h"
+#include "../../include/empleado.h"
+#include "../../include/usuario.h"
+#include "../../include/hostal.h"
 
 empleado::empleado(){}
 
