@@ -30,8 +30,6 @@ class controladorHostal: public IHostal{
 
         
         map<string,hostal*> coleccionHostales;  //coleccion de hostales
-        map<string,habitacion*> coleccionHabitaciones;  //coleccion de hostales, la KEY de la habitación es el concatenado de las strings "codhabitación+nomHostal"
-        map<string,estadia*> coleccionEstadia;  //coleccion de estadia, se identifica con el email del huesped
 
 
         //Memoria de atributos de habitación
@@ -58,10 +56,7 @@ class controladorHostal: public IHostal{
 
     public:
         static controladorHostal* getInstancia();
-        map<string,habitacion*>obtenerHabitaciones();
-        void crearHabitacionHostal(hostal hostal, int numero, int precio, int capacidad);
         void confirmarAltaHostal(string nombre, string direccion, string telefono);
-        void imprimirEmpleadosNoRegistrados(hostal* hos);
         void imprimirEstadias(string nomHostal);
         void imprimirCalificacionesSR(hostal* hos);
         void imprimirHabitaciones(hostal * h);
@@ -75,7 +70,6 @@ class controladorHostal: public IHostal{
         hostal* getHostal(); 
         void asignarEmpHostal();
         habitacion* getHabitacion(hostal* hos, int num); 
-        map<string,estadia*> obtenerEstadias();
         void imprimirlnfoEstadia(string nomHostal, string emailestadia, int cod);
         estadia* getEstadia(); 
         calificacion* obtenerCalificacion(int id, string email, hostal* hos); 
@@ -83,10 +77,6 @@ class controladorHostal: public IHostal{
         void comentarCalificacion(string texto, calificacion* cal); 
         void obtenerTop3Hostales(); 
         void obtenerDetallesHostal(hostal *hos);
-        void obtenerDetallesHabitacion();
-        void obtenerInfoHabitacion(); 
-        void obtenerConsumos(); 
-        void seleccionarConsumos(int cod); 
         void confirmarAltaHabitacion(); 
         void ingresaristarEstadíasFinalizadas(string emailUsuario);
         void ingresarlnfoCalificacion(string mensaje, int calificacion);
@@ -95,7 +85,8 @@ class controladorHostal: public IHostal{
         habitacion * seleccionarHabitacion(int numero);
         void listarEstadiasFinalizadas(string email);
         void imprimirInfoBasicaHostal(hostal *hos);
-        void agregarEstadia(string key, estadia* e);
+
+        void agregarEstadia(string key, estadia* est);
 
         void agregarObservador(IObserver *o);
         void eliminarObservador(IObserver *o);

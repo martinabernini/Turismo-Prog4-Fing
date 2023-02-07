@@ -255,8 +255,8 @@ void controladorReserva::habitacionDisponible(DTFecha *checkIn, DTFecha *checkOu
 	fabrica *fab = fabrica::getInstancia(); // Llamo a la instancia de la fabrica
 	IHostal *ihostal = fab->getIHostal();
 
-	map<string, habitacion*> habitaciones = ihostal->obtenerHabitaciones();
-	map<string, habitacion*>::iterator iter;
+	map<int, habitacion*> habitaciones = h->getColeccionHabitaciones();
+	map<int, habitacion*>::iterator iter;
 	bool reservada = false;
 	bool disponible;
 

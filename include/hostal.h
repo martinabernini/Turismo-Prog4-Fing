@@ -19,8 +19,8 @@ private:
     string direccion;
     string telefono;
     map<string, calificacion *> coleccionCalificaciones;
-    map<int, habitacion *> coleccionHabitaciones;
-    map<string, estadia *> coleccionEstadia;
+    map<int, habitacion *> coleccionHabitaciones; //coleccion de habitaciones, la KEY de la habitación es el concatenado de las strings "codhabitación+nomHostal"
+    map<string, estadia *> coleccionEstadia; //coleccion de estadia, se identifica con el email del huesped
 
 public:
     hostal(string nombre, string direccion, string telefono);
@@ -31,6 +31,8 @@ public:
     string getNombre();
     string getDireccion();
     string getTelefono();
+    habitacion* getHabitacion(int num);
+    estadia* getEstadia(string cod);
     void setNombre(string nombre);
     void setDireccion(string direccion);
     void setTelefono(string telefono);

@@ -131,9 +131,6 @@ bool controladorHostal::estadiaValida(string email){
 
 }
 
-void controladorHostal::crearHabitacionHostal(hostal hostal, int numero, int precio, int capacidad)
-{
-}
 
 void controladorHostal::comentarCalificacion(string texto, calificacion *cal){
   cal->setRespuesta(texto);
@@ -186,14 +183,6 @@ habitacion *controladorHostal::getHabitacion(hostal *hos, int num)
 habitacion *controladorHostal::seleccionarHabitacion(int numero)
 {
   return NULL;
-}
-
-map<string, estadia *> controladorHostal::obtenerEstadias()
-{
-  return coleccionEstadia;
-}
-void controladorHostal::agregarEstadia(string key, estadia* e){
-    this->coleccionEstadia.insert({key,e});
 }
 
 void controladorHostal::imprimirlnfoEstadia(string nomHostal, string emailestadia, int cod)
@@ -297,7 +286,7 @@ calificacion *controladorHostal::obtenerCalificacion(int id, string email, hosta
 
 void controladorHostal::seleccionarEstadia(int cod, string email)
 {
-  map<string, estadia *>::iterator iterador = this->coleccionEstadia.find(to_string(cod) + email);
+  map<string, estadia *>::iterator iterador = hostalSeleccionado->getColeccionEstadia().find(to_string(cod) + email);
   estadia *res = iterador->second;
   this->estadiaSeleccionada = res;
 }
@@ -372,18 +361,8 @@ void controladorHostal::imprimirInfoBasicaHostal(hostal *hos)
   cout << "-------------" << endl;
 };
 
-void controladorHostal::obtenerDetallesHabitacion() {} // NO SE USA: VER imprimirHabitaciones()
-
-void controladorHostal::obtenerInfoHabitacion() {} // NO SE USA
-
-void controladorHostal::obtenerConsumos() {} // NO SE USA: ES DE CONSUMOS
-
-void controladorHostal::seleccionarConsumos(int cod) {} // NO SE USA: ES DE CONSUMOS
-
-void controladorHostal::confirmarAltaHabitacion()
-{
+void controladorHostal::confirmarAltaHabitacion(){
   habitacion *hab = new habitacion(this->numeroHabitacion, this->precioHabitacion, this->capacidadHabitacion);
-  this->coleccionHabitaciones.insert({to_string(numeroHabitacion) + this->hostalSeleccionado->getNombre(), hab});
   this->hostalSeleccionado->agregarHabitacion(numeroHabitacion, hab);
   hab->setHostalHabitacion(this->hostalSeleccionado);
 
@@ -393,6 +372,14 @@ void controladorHostal::confirmarAltaHabitacion()
   this->hostalSeleccionado = NULL;
 
 } // COMPLETAR
+
+void controladorHostal::agregarEstadia(string key, estadia* est){
+  this->hostalSeleccionado->agregarEstadia(key, est);
+  this->hostalSeleccionado = NULL;
+}
+
+
+
 
 void controladorHostal::ingresaristarEstadíasFinalizadas(string emailUsuario) {} // COMPLETAR
 
@@ -409,8 +396,7 @@ void controladorHostal::ingresarInformacionHabitacion(int num, float precio, int
   this->capacidadHabitacion = capacidad;
 }
 
-void controladorHostal::altaCalificacion()
-{
+void controladorHostal::altaCalificacion(){
   cout << "Fecha checkIn: ";
   this->estadiaSeleccionada->getCheckIn()->imprimirFecha();
   reloj *r = reloj::getInstancia();
@@ -435,8 +421,7 @@ void controladorHostal::altaCalificacion()
   notificarObservadores(cal);
 } // COMPLETAR
 
-void controladorHostal::listarEstadiasFinalizadas(string email)
-{
+void controladorHostal::listarEstadiasFinalizadas(string email){
   map<string, hostal *>::iterator it2 = this->coleccionHostales.find(this->hostalSeleccionado->getNombre());
   hostal *elHostal = it2->second;
   cout << "Hostal seleccionado: " << elHostal->getNombre() << endl;
@@ -474,8 +459,7 @@ void controladorHostal::agregarObservador(IObserver *o){
   observers.insert(o);
 }
 
-void controladorHostal::eliminarObservador(IObserver *o)
-{
+void controladorHostal::eliminarObservador(IObserver *o){
   observers.erase(o);
 }
 
@@ -501,11 +485,6 @@ void controladorHostal::imprimirEstadias(string nomHostal){ // imprime todas las
     cout << "Estadia: " << it->second->getHuesped()->getEmail();
     cout << "     Codigo de reserva: " << it->second->getReserva()->getCodigo() << endl;
   }
-}
-
-map<string, habitacion *> controladorHostal::obtenerHabitaciones()
-{
-  return coleccionHabitaciones;
 }
 
 controladorHostal::~controladorHostal() {} // COMPLETAR

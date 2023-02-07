@@ -1,30 +1,25 @@
 #include "../../include/hostal.h"
 #include "../../include/estadia.h"
 
-hostal::hostal(string nombre, string direccion, string telefono)
-{
+hostal::hostal(string nombre, string direccion, string telefono){
   this->nombre = nombre;
   this->direccion = direccion;
   this->telefono = telefono;
 }
 
-map<string, calificacion *> hostal::getColeccionCalificaciones()
-{
+map<string, calificacion *> hostal::getColeccionCalificaciones(){
   return this->coleccionCalificaciones;
 }
 
-map<int, habitacion *> hostal::getColeccionHabitaciones()
-{
+map<int, habitacion *> hostal::getColeccionHabitaciones(){
   return this->coleccionHabitaciones;
 }
 
-map<string, estadia *> hostal::getColeccionEstadia()
-{
+map<string, estadia *> hostal::getColeccionEstadia(){
   return this->coleccionEstadia;
 }
 
-float hostal::getPromedioCalificaciones()
-{
+float hostal::getPromedioCalificaciones(){
   map<string, calificacion *> cals = this->coleccionCalificaciones;
   map<string, calificacion *>::iterator it;
   float total = 0;
@@ -39,28 +34,36 @@ float hostal::getPromedioCalificaciones()
   return total;
 }
 
-string hostal::getNombre()
-{
+string hostal::getNombre(){
   return this->nombre;
 }
-string hostal::getDireccion()
-{
+
+string hostal::getDireccion(){
   return this->direccion;
 }
-string hostal::getTelefono()
-{
+
+string hostal::getTelefono(){
   return this->telefono;
 }
-void hostal::setNombre(string nombre)
-{
+
+habitacion* hostal::getHabitacion(int num){
+  return (this->coleccionHabitaciones.find(num))->second;
+}
+
+
+estadia* hostal::getEstadia(string cod){
+  return (this->coleccionEstadia.find(cod))->second;
+}
+
+
+void hostal::setNombre(string nombre){
   this->nombre = nombre;
 }
-void hostal::setDireccion(string direccion)
-{
+
+void hostal::setDireccion(string direccion){
   this->direccion = direccion;
 }
-void hostal::setTelefono(string telefono)
-{
+void hostal::setTelefono(string telefono){
   this->telefono = telefono;
 }
 
