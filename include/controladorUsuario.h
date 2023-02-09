@@ -48,7 +48,7 @@ class controladorUsuario: public IUsuario{
         void setContrasenia(string contrasenia);
         void setEsFinger(bool finger);
 
-        void imprimirEmpleadosNoRegistrados(hostal *hos);
+        set<DTEmpleado*> obtenerEmpleadosNoRegistrados(hostal *hos);
 
         void setHostalTrabaja(hostal *hos);
         void imprimirReservasHuesped(string emailHuesped);

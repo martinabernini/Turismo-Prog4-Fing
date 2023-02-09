@@ -4,6 +4,7 @@
 #include "usuario.h"
 #include "empleado.h"
 #include "cargoEmpleado.h"
+#include "DTEmpleado.h"
 
 using std::string;
 using namespace std;
@@ -31,7 +32,7 @@ class IUsuario {
 
         //opiti
         virtual void setHostalTrabaja(hostal *hos)=0;
-        virtual void imprimirEmpleadosNoRegistrados(hostal *hos)=0;
+        virtual set<DTEmpleado*> obtenerEmpleadosNoRegistrados(hostal *hos)=0;
         virtual void imprimirReservasHuesped(string emailHuesped)=0;
 
         virtual void imprimirNotificaciones()=0;

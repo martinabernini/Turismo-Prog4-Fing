@@ -32,29 +32,22 @@ void controladorUsuario::imprimirReservasHuesped(string emailHuesped){
 
 };
 
-void controladorUsuario::imprimirEmpleadosNoRegistrados(hostal *hos){
+set<DTEmpleado*> controladorUsuario::obtenerEmpleadosNoRegistrados(hostal *hos){
 
-    map<string, empleado*> empleados;
-    map<string, empleado*>::iterator itE;
+    set<DTEmpleado*> res;
 
     map<string, usuario*>::iterator itU;
+
     for (itU = this->coleccionUsuarios.begin() ; itU != this->coleccionUsuarios.end(); itU ++){
         if (empleado* e = dynamic_cast<empleado*>(itU->second)){
-            if((itE->second->getHostalTrabaja() == hos) && itE->second->getCargo() == 5){
-                empleados.insert({e->getEmail(), e});
+            if(e->getHostalTrabaja() == NULL){
+                DTEmpleado *aux = new DTEmpleado(e->getEmail(), e->getNombre() , e->getPassword(), e->getCargo(),e->getEstaSuscrito() ,e->getHostalTrabaja());
+                res.insert(aux);
             } 
         }
     }
 
-    for (itE = empleados.begin(); itE != empleados.end(); itE++)
-    {
-        
-        empleado *empAux = itE->second;
-        DTEmpleado *aux = new DTEmpleado(empAux->getEmail(), empAux->getNombre() , empAux->getPassword(), empAux->getCargo(),empAux->getEstaSuscrito() ,empAux->getHostalTrabaja());
-        cout<< "-Nombre: "<< aux->getNombre() << endl;
-        cout<< "-Email: "<< aux->getEmail() << endl;
-        cout<< "-----------" << endl;
-    }
+    return res;
 };
 
 huesped* controladorUsuario::findHuesped(string nombre){
