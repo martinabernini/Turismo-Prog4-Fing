@@ -33,20 +33,34 @@ void controladorUsuario::imprimirReservasHuesped(string emailHuesped){
 };
 
 void controladorUsuario::imprimirEmpleadosNoRegistrados(hostal *hos){
+
+    map<string, usuario*>::iterator itU;
+    for (itU = this->coleccionUsuarios.begin() ; itU != this->coleccionUsuarios.end(); itU ++){
+        if (empleado* e = dynamic_cast<empleado*>(itU->second)){
+            cout << e->getNombre() << endl;
+        }
+    }
+    
+    // if(NewType* v = dynamic_cast<NewType*>(old))
+
     map<string, empleado*> empleados = this->coleccionEmpleados;
     map<string, empleado*>::iterator itE;
+
+
+
+
     map<int,empleado*> empleadosNoRegistrados;
     map<int,empleado*>::iterator itENR;
     int i = 1;
     for(itE = empleados.begin(); itE != empleados.end(); itE++){
         
-        if (itE->second->getHostalTrabaja() != hos){
-            i = i + 1;
+        if ((itE->second->getHostalTrabaja() == hos) && itE->second->getCargo() == 5){
             empleadosNoRegistrados.insert({i,itE->second});
-        }        
+        }       
     }
     for (itENR = empleadosNoRegistrados.begin(); itENR != empleadosNoRegistrados.end(); itENR++)
     {
+        
         empleado *empAux = itENR->second;
         DTEmpleado *aux = new DTEmpleado(empAux->getEmail(), empAux->getNombre() , empAux->getPassword(), empAux->getCargo(),empAux->getEstaSuscrito() ,empAux->getHostalTrabaja());
         cout<< "-Nombre: "<< aux->getNombre() << endl;
@@ -55,34 +69,6 @@ void controladorUsuario::imprimirEmpleadosNoRegistrados(hostal *hos){
         cout<< "-----------" << endl;
     }
 };
-
-/*
-void controladorUsuario::imprimirReservasHuesped(string emailHuesped){
-    map<string, reserva*> reservas = this->coleccionReserva;
-    map<string, reserva*>::iterator it;
-
-    this->seleccionarHuesped(emailHuesped);
-    huesped *hues = this->getHuesped();
-
-    for(it = reservas.begin(); it != reservas.end(); it++){
-        
-        if (it->second->getHuesped() = hues){
-            reserva *resAux = it->second;
-            DTReserva *aux = new DTReserva(resAux->getCodigo(), resAux->getCheckIn(), resAux->getCheckOut(), resAux->getEstado(), resAux->getHuesped(), resAux->getHabitacion());
-
-            cout<< "Codigo: " << aux->getCodigo() << endl;
-            cout<< "Fecha check in: " << aux->getCheckIn() << endl;
-            cout<< "Fecha check out: " << aux->getCheckOut() << endl;
-            cout<< "Estado: " << aux->getEstado() << endl;
-            cout<< "A nombre de: " << aux->getHuespedDTReserva() << endl;
-            cout<< "Habitacion: " << aux->getHabitacion() << endl;
-        }        
-    }
-}
-
-*/
-
-
 
 huesped* controladorUsuario::findHuesped(string nombre){
     map<string, huesped*>::iterator it;

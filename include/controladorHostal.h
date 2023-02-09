@@ -27,10 +27,8 @@ class controladorHostal: public IHostal{
         string direccion;
         string telefono;   
         //setters habitaciones
-
         
         map<string,hostal*> coleccionHostales;  //coleccion de hostales
-
 
         //Memoria de atributos de habitación
         int numeroHabitacion;
