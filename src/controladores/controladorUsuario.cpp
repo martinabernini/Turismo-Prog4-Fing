@@ -34,46 +34,33 @@ void controladorUsuario::imprimirReservasHuesped(string emailHuesped){
 
 void controladorUsuario::imprimirEmpleadosNoRegistrados(hostal *hos){
 
+    map<string, empleado*> empleados;
+    map<string, empleado*>::iterator itE;
+
     map<string, usuario*>::iterator itU;
     for (itU = this->coleccionUsuarios.begin() ; itU != this->coleccionUsuarios.end(); itU ++){
         if (empleado* e = dynamic_cast<empleado*>(itU->second)){
-            cout << e->getNombre() << endl;
+            if((itE->second->getHostalTrabaja() == hos) && itE->second->getCargo() == 5){
+                empleados.insert({e->getEmail(), e});
+            } 
         }
     }
-    
-    // if(NewType* v = dynamic_cast<NewType*>(old))
 
-    map<string, empleado*> empleados = this->coleccionEmpleados;
-    map<string, empleado*>::iterator itE;
-
-
-
-
-    map<int,empleado*> empleadosNoRegistrados;
-    map<int,empleado*>::iterator itENR;
-    int i = 1;
-    for(itE = empleados.begin(); itE != empleados.end(); itE++){
-        
-        if ((itE->second->getHostalTrabaja() == hos) && itE->second->getCargo() == 5){
-            empleadosNoRegistrados.insert({i,itE->second});
-        }       
-    }
-    for (itENR = empleadosNoRegistrados.begin(); itENR != empleadosNoRegistrados.end(); itENR++)
+    for (itE = empleados.begin(); itE != empleados.end(); itE++)
     {
         
-        empleado *empAux = itENR->second;
+        empleado *empAux = itE->second;
         DTEmpleado *aux = new DTEmpleado(empAux->getEmail(), empAux->getNombre() , empAux->getPassword(), empAux->getCargo(),empAux->getEstaSuscrito() ,empAux->getHostalTrabaja());
         cout<< "-Nombre: "<< aux->getNombre() << endl;
         cout<< "-Email: "<< aux->getEmail() << endl;
-        cout<< "-Cargo: "<< aux->getCargo() << endl;
         cout<< "-----------" << endl;
     }
 };
 
 huesped* controladorUsuario::findHuesped(string nombre){
-    map<string, huesped*>::iterator it;
-	it = this->coleccionHuesped.find(nombre);
-	huesped *res = it->second;
+    map<string, usuario*>::iterator it;
+	it = this->coleccionUsuarios.find(nombre);
+	huesped *res = dynamic_cast<huesped*>(it->second);
 	return res;
 }
 
@@ -99,8 +86,9 @@ void controladorUsuario::setEsFinger(bool finger){
 
 
 void controladorUsuario::seleccionarEmpleado(string email){
-    map<string, empleado*>::iterator it = this->coleccionEmpleados.find(email);
-	this->empleadoSeleccionado = it->second;
+    map<string, usuario*>::iterator it = this->coleccionUsuarios.find(email);
+    empleado* e = dynamic_cast<empleado*>(it->second);
+	this->empleadoSeleccionado = e;
 };
 
 empleado* controladorUsuario::getEmpleado(){
@@ -114,9 +102,10 @@ usuario* controladorUsuario::seleccionarUsuario(string nombre){
 
 void controladorUsuario::asignarCargo(string nombre, cargoEmpleado cargo){}
 	
-huesped* controladorUsuario::seleccionarHuesped(string email) {
-	map<string, huesped*>::iterator it= this->coleccionHuesped.find(email);
-	this->huespedSeleccionado = it->second;
+    huesped* controladorUsuario::seleccionarHuesped(string email) {
+	map<string, usuario*>::iterator it= this->coleccionUsuarios.find(email);
+    huesped* h = dynamic_cast<huesped*>(it->second);
+	this->huespedSeleccionado = h;
     return huespedSeleccionado;
 }
 
@@ -125,20 +114,14 @@ huesped* controladorUsuario::getHuesped() {
 } 
 
 empleado* controladorUsuario::findEmpleado(string email){
-    map<string,empleado*>::iterator iterador = this->coleccionEmpleados.find(email);
-    return iterador->second;
+    map<string,usuario*>::iterator it = this->coleccionUsuarios.find(email);
+    empleado* e = dynamic_cast<empleado*>(it->second);
+    return e;
 }
 
 
 bool controladorUsuario::existeUsuario(){
-    bool existe = false;
-
-    if (this->coleccionEmpleados.count(this->email) > 0){
-        existe = true;
-    } else {
-        existe = (this->coleccionHuesped.count(this->email) > 0);
-    }
-    return existe;
+    return (this->coleccionUsuarios.count(this->email) > 0);
 };
 
 void controladorUsuario::ingresarDatosUsuario(){
@@ -228,10 +211,10 @@ void controladorUsuario::actualizarEmailUsuario(string email){
 void controladorUsuario::confirmarAltaUsuario(){
     if (this->cargo == NoInicializado){
         huesped *nuevoHuesped = new huesped(this->email, this->nombre, this->password, this->esFinger);
-        this->coleccionHuesped.insert({this->email, nuevoHuesped});
+        this->coleccionUsuarios.insert({this->email, nuevoHuesped});
     } else {
         empleado *nuevoEmpleado = new empleado(this->email, this->nombre, this->password, this->cargo, NULL);
-        this->coleccionEmpleados.insert({this->email, nuevoEmpleado});
+        this->coleccionUsuarios.insert({this->email, nuevoEmpleado});
     }
 
     cout << "Se ha dado de alta el usuario exitosamente\n";
@@ -255,20 +238,32 @@ void controladorUsuario::cancelarAltaIngreso(){
 
 void controladorUsuario::imprimirUsuarios(){ //imprime solo los nombres de los usuarios
     
-    map<string,huesped*> huespedes =this->coleccionHuesped; //coleccion de huespedes
-    map<string,huesped*> :: iterator it; 
+    map<string,usuario*> usuarios =this->coleccionUsuarios; //coleccion de usuarios
+    map<string,usuario*> :: iterator itU; 
 
-     cout << "---------------------Listado de huespedes registrados en el sistema----------------------------" << endl;
+    map<string, empleado*> empleados;
+    map<string, empleado*>::iterator itER;
+
+    map<string, huesped*> huespedes;
+    map<string, huesped*>::iterator it;
+
+    for (itU = this->coleccionUsuarios.begin() ; itU != this->coleccionUsuarios.end(); itU ++){
+        if (empleado* e = dynamic_cast<empleado*>(itU->second)){
+            empleados.insert({e->getEmail(), e});
+        } else {
+            huesped* h = dynamic_cast<huesped*>(itU->second);
+            huespedes.insert({h->getEmail(), h});
+        }
+    }
+
+    cout << "---------------------Listado de huespedes registrados en el sistema----------------------------" << endl;
     for (it = huespedes.begin(); it != huespedes.end(); it++){
     huesped *hueAux = it->second;
     DTHuesped *aux = new DTHuesped(hueAux->getNombre(), hueAux->getEmail(), hueAux->getEsFinger());
     cout << "-Nombre del huesped: " << aux->getNombre() << endl;
     cout << "-Email: " << aux->getEmail() << endl;
     delete(aux);
-}
-
-    map<string,empleado*> empleados =this->coleccionEmpleados; //coleccion de huespedes
-    map<string,empleado*> :: iterator itER; 
+    }
 
 
      cout << "---------------------Listado de empleados registrados en el sistema----------------------------" << endl;
@@ -280,7 +275,7 @@ void controladorUsuario::imprimirUsuarios(){ //imprime solo los nombres de los u
     cout << "-Nombre del empleado: " << aux->getNombre() << endl;
     cout << "-Email: " << aux->getEmail() << endl;
     delete(aux);
-}
+    }
 }
 
 
@@ -325,18 +320,28 @@ void controladorUsuario::obtenerEmpleados(string nomHostal){}
 void controladorUsuario::obtenerReservasHuesped(string email){}
 
 void controladorUsuario::obtenerHuespedes(){
-    map<string,huesped*> huespedes =this->coleccionHuesped; //coleccion de huespedes
-    map<string,huesped*> :: iterator it; 
+
+    map<string,usuario*> usuarios =this->coleccionUsuarios; //coleccion de usuarios
+    map<string,usuario*> :: iterator itU; 
+
+    map<string, huesped*> huespedes;
+    map<string, huesped*>::iterator it;
+
+    for (itU = this->coleccionUsuarios.begin() ; itU != this->coleccionUsuarios.end(); itU ++){
+        if (huesped* h = dynamic_cast<huesped*>(itU->second)){
+            huespedes.insert({h->getEmail(), h});
+        }
+    }
 
      cout << "---------------------Listado de usuarios registrados en el sistema----------------------------" << endl;
-  for (it = huespedes.begin(); it != huespedes.end(); it++){
-    huesped *hueAux = it->second;
-    DTHuesped *aux = new DTHuesped(hueAux->getNombre(), hueAux->getEmail(), hueAux->getEsFinger());
-    cout << "-Nombre del huesped: " << aux->getNombre() << endl;
-    cout << "-Email: " << aux->getEmail() << endl;
-    cout << "-Es finger: " << aux->getEsFinger() << endl;
-    cout << "-------------" << endl;
-    delete(aux);
+    for (it = huespedes.begin(); it != huespedes.end(); it++){
+        huesped *hueAux = it->second;
+        DTHuesped *aux = new DTHuesped(hueAux->getNombre(), hueAux->getEmail(), hueAux->getEsFinger());
+        cout << "-Nombre del huesped: " << aux->getNombre() << endl;
+        cout << "-Email: " << aux->getEmail() << endl;
+        cout << "-Es finger: " << aux->getEsFinger() << endl;
+        cout << "-------------" << endl;
+        delete(aux);
     }
 }
 
@@ -344,8 +349,19 @@ void controladorUsuario::obtenerUsuarios(){}
 
 
 void controladorUsuario::obtenerEmpleados(){
-    map<string, empleado*> empleados = this->coleccionEmpleados;
+
+    map<string,usuario*> usuarios =this->coleccionUsuarios; //coleccion de usuarios
+    map<string,usuario*> :: iterator itU; 
+
+    map<string, empleado*> empleados;
     map<string, empleado*>::iterator it;
+
+    for (itU = this->coleccionUsuarios.begin() ; itU != this->coleccionUsuarios.end(); itU ++){
+        if (empleado* e = dynamic_cast<empleado*>(itU->second)){
+            empleados.insert({e->getEmail(), e});
+        }
+    }
+
     for (it = empleados.begin(); it != empleados.end(); it++){
         empleado *empAux = it->second;
         DTEmpleado *aux = new DTEmpleado(empAux->getEmail(), empAux->getNombre() , empAux->getPassword(), empAux->getCargo(),empAux->getEstaSuscrito() ,empAux->getHostalTrabaja());
