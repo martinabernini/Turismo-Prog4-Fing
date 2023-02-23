@@ -11,15 +11,13 @@ void cu_consultaDeUsuario(){
     string rol,email;
     iusuario->imprimirUsuarios();
     
-    cout << "Ingrese si el usuario es huesped(H) o empleado(E) y luego el email del usuario sobre el cual desea consultar" <<endl;
+    cout << "Ingrese si el usuario es huesped(H) o empleado(E) y luego (enter) el email del usuario sobre el cual desea consultar" <<endl;
     cin.ignore();
     getline(cin, rol);
     if ((rol != "E")   && (rol!="H")){
         return;
     }
     getline(cin, email);
-    cout << email;
-
     iusuario->obtenerInfoUsuario(rol,email);
     
 };

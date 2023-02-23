@@ -23,6 +23,7 @@ using namespace std;
 #include "include/cu_eliminarSuscripcion.h"
 #include "include/cu_modificarFechaDelSistema.h"
 #include "include/cu_cargarDatosDePrueba.h"
+#include "include/imprimirInfo.h"
 
 #include "include/fabrica.h"
 #include "include/reloj.h"
@@ -57,6 +58,7 @@ int menuPrincipal()
   cout << "19 - Modificar Fecha del Sistema" << endl; //Implementado, falta probar
   cout << "20 - Cargar datos de prueba" << endl;
   cout << "21 - Salir" << endl;
+  cout << "22 - imprimir la info que tengo" << endl;
   int opcion = 0;
   cin >> opcion;
   return opcion;
@@ -157,6 +159,10 @@ int main(){
       };
       case 21:{
         salir=false;
+        break;
+      }
+      case 22:{
+        imprimirInfo();
         break;
       }
       default:{

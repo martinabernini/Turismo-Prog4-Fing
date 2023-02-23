@@ -9,4 +9,5 @@
   Infraestructura,
   NoInicializado
  };
+
 #endif

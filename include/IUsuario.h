@@ -58,6 +58,10 @@ class IUsuario {
         virtual void obtenerHuespedes()=0; 
         virtual void obtenerUsuarios()=0; 
 
+
+        //IMPRIMIRINFO
+        virtual void imprimirTodaLaInfoDeUsuarios()=0;
+
         virtual ~IUsuario() {};
 };
 

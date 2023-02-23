@@ -21,7 +21,7 @@ class empleado : public usuario, public IObserver{
     public:
         empleado();
         empleado(string email, string nombre, string password, cargoEmpleado cargo,hostal* hostalTrabaja);
-        cargoEmpleado getCargo();
+        string getCargo();
         hostal* getHostalTrabaja();
         void setHostalTrabaja(hostal *hos);
         bool getEstaSuscrito();
@@ -32,5 +32,6 @@ class empleado : public usuario, public IObserver{
         void getNombresito();
         set<calificacion*> getNotificaciones();
         void eliminarNotificaciones();
+
 };
 #endif

@@ -41,7 +41,21 @@ set<DTEmpleado*> controladorUsuario::obtenerEmpleadosNoRegistrados(hostal *hos){
     for (itU = this->coleccionUsuarios.begin() ; itU != this->coleccionUsuarios.end(); itU ++){
         if (empleado* e = dynamic_cast<empleado*>(itU->second)){
             if(e->getHostalTrabaja() == NULL){
-                DTEmpleado *aux = new DTEmpleado(e->getEmail(), e->getNombre() , e->getPassword(), e->getCargo(),e->getEstaSuscrito() ,e->getHostalTrabaja());
+
+                cargoEmpleado cargo;
+                if (e->getCargo() == "Administracion"){
+                    cargo= Administracion;
+                } else if (e->getCargo() == "Limpieza"){
+                    cargo= Limpieza;
+                } else if(e->getCargo() == "Recepcion") {
+                    cargo= Recepcion;
+                } else if(e->getCargo() == "Infraestructura") {
+                     cargo= Infraestructura;
+                } else {
+                    cargo= NoInicializado;
+                }
+                
+                DTEmpleado *aux = new DTEmpleado(e->getEmail(), e->getNombre() , e->getPassword(), cargo,e->getEstaSuscrito() ,e->getHostalTrabaja());
                 res.insert(aux);
             } 
         }
@@ -263,11 +277,8 @@ void controladorUsuario::imprimirUsuarios(){ //imprime solo los nombres de los u
     for (itER = empleados.begin(); itER != empleados.end(); itER++){
     empleado *empAux = itER->second;
     string nomhos;
-    hostal* h = empAux->getHostalTrabaja();
-    DTEmpleado *aux = new DTEmpleado(empAux->getEmail(),empAux->getNombre(),"", empAux->getCargo(),empAux->getEstaSuscrito(),h);
-    cout << "-Nombre del empleado: " << aux->getNombre() << endl;
-    cout << "-Email: " << aux->getEmail() << endl;
-    delete(aux);
+    cout << "-Nombre del empleado: " << empAux->getNombre() << endl;
+    cout << "-Email: " << empAux->getEmail() << endl;
     }
 }
 
@@ -286,11 +297,10 @@ void controladorUsuario::obtenerInfoUsuario(string rol, string email){
     } else {
         empleado* e=findEmpleado(email);
         hostal* h= e->getHostalTrabaja();
-        DTEmpleado* aux=new DTEmpleado(e->getEmail(),e->getEmail(),"",e->getCargo(),e->getEstaSuscrito(),h);
 
-        cout << "-Nombre del empleado: " << aux->getNombre() << endl;
-        cout << "-Email: " << aux->getEmail() << endl;
-        cout << "-Cargo: " << aux->getCargo() << endl;
+        cout << "-Nombre del empleado: " << e->getNombre() << endl;
+        cout << "-Email: " << e->getEmail() << endl;
+        cout << "-Cargo: " << e->getCargo() << endl;
         if (h==NULL)
             cout << "-Hotel donde trabaja: aun no se le asigna un hostal" << endl;
         else 
@@ -340,6 +350,53 @@ void controladorUsuario::obtenerHuespedes(){
 
 void controladorUsuario::obtenerUsuarios(){}
 
+void controladorUsuario::imprimirTodaLaInfoDeUsuarios(){
+    map<string,usuario*> usuarios = this->coleccionUsuarios; //coleccion de usuarios
+    map<string,usuario*> :: iterator itU; 
+
+ // cout << "--------------------------------------------------------" << endl;
+    cout << "-                                                      -" << endl;
+    cout << "-------------------- HUESPEDES -------------------------" << endl;
+    cout << endl;
+
+    for (itU = this->coleccionUsuarios.begin() ; itU != this->coleccionUsuarios.end(); itU ++){
+        if (huesped* h = dynamic_cast<huesped*>(itU->second)){
+            cout << "-Nombre del huesped: " << h->getNombre() << endl;
+            cout << "-Email: " << h->getEmail() << endl;
+            cout << "-Es finger: ";
+            if (h->getEsFinger() == 1){
+              cout << "Si" << endl;
+            } else {
+                cout << "No" << endl;
+            }
+            cout << "-Contrasenia: " << h->getPassword() << endl;
+
+            cout << "--------------------------------- " << endl;
+        }
+    }
+
+    cout << "-                                                      -" << endl;
+    cout << "-------------------- EMPLEADOS -------------------------" << endl;
+    cout << endl;
+
+    for (itU = this->coleccionUsuarios.begin() ; itU != this->coleccionUsuarios.end(); itU ++){
+        if (empleado* e = dynamic_cast<empleado*>(itU->second)){
+            cout << "-Nombre del empleado: " << e->getNombre() << endl;
+            cout << "-Email: " << e->getEmail() << endl;
+            cout << "-Contrasenia: " << e->getPassword() << endl;
+            cout << "-Cargo: " << e->getCargo() << endl;
+            if (e->getHostalTrabaja() ==NULL)
+                cout << "-Hostal donde trabaja: aun no se le asigna un hostal" << endl;
+            else 
+                cout << "-Hostal donde trabaja: " << e->getHostalTrabaja()->getNombre() << endl;
+
+            cout << "--------------------------------- " << endl;
+        }
+    }
+}
+
+
+
 
 void controladorUsuario::obtenerEmpleados(){
 
@@ -357,10 +414,8 @@ void controladorUsuario::obtenerEmpleados(){
 
     for (it = empleados.begin(); it != empleados.end(); it++){
         empleado *empAux = it->second;
-        DTEmpleado *aux = new DTEmpleado(empAux->getEmail(), empAux->getNombre() , empAux->getPassword(), empAux->getCargo(),empAux->getEstaSuscrito() ,empAux->getHostalTrabaja());
-        cout<< "-Nombre: "<< aux->getNombre() << endl;
-        cout<< "-Email: "<< aux->getEmail() << endl;
-        delete(aux);
+        cout<< "-Nombre: "<< empAux->getNombre() << endl;
+        cout<< "-Email: "<< empAux->getEmail() << endl;
         cout << "----------------------------"<< endl;
     }//for
 }

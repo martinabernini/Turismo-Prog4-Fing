@@ -10,8 +10,16 @@ empleado::empleado(string email, string nombre, string password, cargoEmpleado c
     this->hostalTrabaja=NULL;
 }
 
-cargoEmpleado empleado::getCargo(){
-    return this->cargo;
+string empleado::getCargo(){
+    switch (this->cargo)
+    {
+        case Administracion:   return "Administracion";
+        case Limpieza:   return "Limpieza";
+        case Recepcion: return "Recepcion";
+        case Infraestructura: return "Infraestructura";
+        case NoInicializado: return "No Inicializado";
+        default: return "No Inicializado";
+    }
 }
 
 hostal* empleado::getHostalTrabaja(){

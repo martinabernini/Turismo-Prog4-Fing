@@ -106,7 +106,6 @@ void cu_cargarDatosDePrueba()
   //hostales (ref, nombre, direccion, tel)
   hostal *HO1, *HO2, *HO3, *HO4, *HO5;
 
-  cout<< "LLegue al hostal" << endl;
   ihostal->confirmarAltaHostal("La posada del finger", "Av de la playa 123, Maldonado", "099111111");
   ihostal->seleccionarHostal("La posada del finger");
   HO1 = ihostal->getHostal();
@@ -130,49 +129,40 @@ void cu_cargarDatosDePrueba()
 
   habitacion *HAB1 ,*HAB2, *HAB3, *HAB4, *HAB5, *HAB6;
 
-  cout<< "LLegue a la habitacion" << endl;
 
   ihostal->seleccionarHostal(HO1->getNombre());
   ihostal->ingresarInformacionHabitacion(1, 40, 2);
   ihostal->confirmarAltaHabitacion();
   HAB1 = ihostal->getHabitacion(HO1, 1);
 
-  cout<< "LLegue a la habitacion 1" << endl;
-
   ihostal->seleccionarHostal(HO1->getNombre());
   ihostal->ingresarInformacionHabitacion(2, 10, 7);
   ihostal->confirmarAltaHabitacion();
   HAB2 = ihostal->getHabitacion(HO1, 2);
-
-  cout<< "LLegue a la habitacion 2" << endl;
 
   ihostal->seleccionarHostal(HO1->getNombre());
   ihostal->ingresarInformacionHabitacion(3, 30, 3);
   ihostal->confirmarAltaHabitacion();
   HAB3 = ihostal->getHabitacion(HO1, 3);
 
-  cout<< "LLegue a la habitacion 3" << endl;
 
   ihostal->seleccionarHostal(HO1->getNombre());
   ihostal->ingresarInformacionHabitacion(4, 5, 12);
   ihostal->confirmarAltaHabitacion();
   HAB4 = ihostal->getHabitacion(HO1, 4);
 
-  cout<< "LLegue a la habitacion 4" << endl;
 
   ihostal->seleccionarHostal(HO5->getNombre());
   ihostal->ingresarInformacionHabitacion(1, 3, 2);
   ihostal->confirmarAltaHabitacion();
   HAB5 = ihostal->getHabitacion(HO5, 1);
 
-  cout<< "LLegue a la habitacion 5" << endl;
 
   ihostal->seleccionarHostal(HO3->getNombre());
   ihostal->ingresarInformacionHabitacion(1, 9, 5);
   ihostal->confirmarAltaHabitacion();
   HAB6 = ihostal->getHabitacion(HO3, 1);
 
-  cout<< "LLegue a la habitacion 6" << endl;
 
   //finalizar estadias
   //calificar estadias 
@@ -207,7 +197,6 @@ void cu_cargarDatosDePrueba()
   map<string, huesped*> huespedNull;
   huespedNull.begin() = huespedNull.end();
 
-  cout<< "1" << endl;
   map<string, huesped*> huespedes;
   huespedes.insert({emailH2,H2});
   huespedes.insert({emailH3,H3});
@@ -216,7 +205,6 @@ void cu_cargarDatosDePrueba()
 
   map<string, huesped*>::iterator it;
 
-  cout<< "2" << endl;
 
   ireserva->confirmarReserva(HO1,fechaInR1,fechaOutR1,0,HAB1,H1,huespedNull);
   R1 = ireserva->seleccionarReserva(1);
@@ -226,9 +214,6 @@ void cu_cargarDatosDePrueba()
   R3 = ireserva->seleccionarReserva(3);
   ireserva->confirmarReserva(HO5,fechaInR4,fechaOutR4,0,HAB5,H6,huespedNull);
   R4 = ireserva->seleccionarReserva(4);
-
-
-  cout<< "3" << endl;
 
 
   //estadias (ref, reserva, huesped, check in)
@@ -241,7 +226,6 @@ DTFecha *fecha7 = new DTFecha(10,05,2022,9,00);
 DTFecha *fecha8 = new DTFecha(5,01,2001,2,00);
 DTFecha *fecha9 = new DTFecha(15,06,2022,10,00);
 
-cout<< "4" << endl;
 
 estadia *ES1 = new estadia(fecha1, fecha7, R1, H1, NULL);
 HO1->agregarEstadia(to_string(R1->getCodigo()) + H1->getEmail(), ES1);
@@ -261,8 +245,6 @@ HO3->agregarEstadia(to_string(R2->getCodigo()) + H5->getEmail(), ES5);
 estadia *ES6 = new estadia(fecha6, fecha8, R4, H6, NULL);
 HO5->agregarEstadia(to_string(R4->getCodigo()) + H6->getEmail(), ES6);
 
-cout<< "5" << endl;
-
   //calificar estadias
     string comentarioES1 = "Un poco caro para lo que ofrecen. El famoso gimnasio era una caminadora (que hacía tremendo ruido) y 2 pesas, la piscina parecía el lago del Parque Rodó y el desayuno eran 2 tostadas con mermelada. Internet se pasaba cayendo. No vuelvo.";
     string comentarioES2 = "Se pone peligroso de noche, no recomiendo. Además no hay caja fuerte para guardar anillos.";
@@ -271,7 +253,6 @@ cout<< "5" << endl;
     DTFecha *fechaC2 = new DTFecha(05,01,2001,3,00);
     DTFecha *fechaC3 = new DTFecha(15,06,2022,23,00);
 
-cout<< "6" << endl;
 
     calificacion *C1 = new calificacion(3,comentarioES1,fechaC1,H1,1);
     HO1->agregarCalificacion(to_string(1) + emailH1, C1);
@@ -285,7 +266,6 @@ cout<< "6" << endl;
     HO5->agregarCalificacion(to_string(4) + emailH6, C3);
     ES3->setCalificacion(C3);
     
-cout<< "7" << endl;
 
   //comentar calificacion
   string respuesta = "Desaparecio y se fue sin pagar";

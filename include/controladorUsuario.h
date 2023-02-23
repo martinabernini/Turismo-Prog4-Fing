@@ -78,6 +78,8 @@ class controladorUsuario: public IUsuario{
         void imprimirNotificaciones();
         empleado* getEmpleado();
 
+        void imprimirTodaLaInfoDeUsuarios();
+
         ~controladorUsuario();
 };
 
